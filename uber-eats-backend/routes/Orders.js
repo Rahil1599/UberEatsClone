@@ -9,12 +9,11 @@ router.post("/orders/customer/:id", function (req, resp) {
   let customerId = req.params.id;
   let cart = req.body.cart;
   let addressId = req.body.addressId;
+  let mode = req.body.mode;
 
   let restaurants = [[...new Set(cart.map((item) => item.RestaurantId))]];
 
-  const query =
-    "select RestaurantId, Mode from Restaurant where RestaurantId in (?)";
-  console.log(query);
+  const query = "select RestaurantId from Restaurant where RestaurantId in (?)";
   dbPool.query(query, restaurants, async (err, results, fields) => {
     if (err) {
       console.log(err);
@@ -23,28 +22,15 @@ router.post("/orders/customer/:id", function (req, resp) {
       let orderDetails = [];
       let orders = [];
       let restaurantOrderMap = [];
-      console.log(restaurants);
       results.map((restaurant) => {
         orderId = uuidv4();
         currentTimeStamp = new Date();
-        console.log(
-          JSON.stringify([
-            orderId,
-            customerId,
-            restaurant.RestaurantId,
-            "New",
-            restaurant.Mode,
-            currentTimeStamp,
-            currentTimeStamp,
-            addressId,
-          ])
-        );
         orders.push([
           orderId,
           customerId,
           restaurant.RestaurantId,
           "New",
-          restaurant.Mode,
+          mode,
           currentTimeStamp,
           currentTimeStamp,
           addressId,
@@ -63,12 +49,12 @@ router.post("/orders/customer/:id", function (req, resp) {
         orderDetails.push([
           restaurantOrderMap[item.RestaurantId],
           item.DishId,
-          item.Quantity.item.Price,
+          item.Quantity,
+          item.Price,
         ]);
       });
-      console.log(JSON.stringify([orderDetails]));
       const detailsQuery =
-        "INSERT INTO OrderDetails (OrderId, DishId, Quantity) VALUES ?";
+        "INSERT INTO OrderDetails (OrderId, DishId, Quantity, Price) VALUES ?";
       dbPool.query(detailsQuery, [orderDetails], (err, results, fields) => {
         if (err) {
           console.log(err);
@@ -81,9 +67,9 @@ router.post("/orders/customer/:id", function (req, resp) {
 });
 
 router.get("/orders/customer/:id", function (req, res) {
-  const customerId = '36511964-74d7-48b0-b963-eb017b1108af' //harccoding fofr a  while: req.params.id;
+  let customerId = req.params.id;
   const query =
-    "SELECT o.OrderId, o.OrderStatus, d.DishId, d.DishName, od.Price, od.Quantity, r.RestaurantId, r.RestaurantName, a.AddressId, CONCAT(a.AddressLine1,',', a.AddressLine2, ',', a.City, ',', a.State, ',', a.Country, ',', a.PinCode) as DeliveryAddress  FROM Orders as o INNER JOIN OrderDetails as od on o.OrderId = od.OrderId INNER JOIN Dishes as d on d.DishId = od.DishId INNER JOIN Restaurant as r on r.RestaurantID = o.RestaurantId INNER JOIN Address as a on a.AddressId = o.AddressId where o.CustomerId = ?;";
+    "SELECT o.OrderId, o.OrderStatus, o.DeliveryType, d.DishId, d.DishName, od.Price, od.Quantity, r.RestaurantId, r.RestaurantName, a.AddressId, CONCAT(a.AddressLine1,',', a.AddressLine2, ',', a.City, ',', a.State, ',', a.Country, ',', a.PinCode) as DeliveryAddress FROM Orders as o INNER JOIN OrderDetails as od on o.OrderId = od.OrderId INNER JOIN Dishes as d on d.DishId = od.DishId INNER JOIN Restaurant as r on r.RestaurantID = o.RestaurantId INNER JOIN Address as a on a.AddressId = o.AddressId where o.CustomerId = ?;";
   dbPool.query(query, [customerId], (err, results, fields) => {
     const orderItems = groupBy(results, "OrderId");
     Object.keys(orderItems).forEach((orderId) => {
@@ -98,20 +84,19 @@ router.get("/orders/customer/:id", function (req, res) {
       RestaurantName: orderItems[orderId][0].RestaurantName,
       AddressId: orderItems[orderId][0].AddressId,
       DeliveryAddress: orderItems[orderId][0].DeliveryAddress,
+      DeliveryType: orderItems[orderId][0].DeliveryType,
       items: orderItems[orderId],
-    }));       
+    }));
     res.status(200).send(response);
   });
 });
 
 router.get("/orders/restaurant/:id", function (req, res) {
-  
-  const restaurantId = 'ae25fd4f-9714-49bf-b8b5-8cf2be9b9921' // hardcoding for a while : req.params.id;
+  let restaurantId = req.params.id;
   const query =
-    "SELECT o.OrderId, o.OrderStatus, d.DishId, d.DishName, od.Price, od.Quantity, r.RestaurantId, r.RestaurantName, a.AddressId, CONCAT(a.AddressLine1,',', a.AddressLine2, ',', a.City, ',', a.State, ',', a.Country, ',', a.PinCode) as DeliveryAddress  FROM Orders as o INNER JOIN OrderDetails as od on o.OrderId = od.OrderId INNER JOIN Dishes as d on d.DishId = od.DishId INNER JOIN Restaurant as r on r.RestaurantID = o.RestaurantId INNER JOIN Address as a on a.AddressId = o.AddressId where o.RestaurantId = ?;";
+    "SELECT o.OrderId, o.OrderStatus, o.DeliveryType, d.DishId, d.DishName, od.Price, od.Quantity, r.RestaurantId, c.CustomerName, a.AddressId, CONCAT(a.AddressLine1,',', a.AddressLine2, ',', a.City, ',', a.State, ',', a.Country, ',', a.PinCode) as DeliveryAddress  FROM Orders as o INNER JOIN OrderDetails as od on o.OrderId = od.OrderId INNER JOIN Dishes as d on d.DishId = od.DishId INNER JOIN Restaurant as r on r.RestaurantID = o.RestaurantId INNER JOIN Address as a on a.AddressId = o.AddressId INNER JOIN Customer as c on c.CustomerId = o.CustomerId where o.RestaurantId = ?;";
   dbPool.query(query, [restaurantId], (err, results, fields) => {
     const orderItems = groupBy(results, "OrderId");
-    console.info(results);
     Object.keys(orderItems).forEach((orderId) => {
       orderItems[orderId] = orderItems[orderId].map((item) =>
         JSON.parse(JSON.stringify(item))
@@ -121,9 +106,10 @@ router.get("/orders/restaurant/:id", function (req, res) {
       OrderId: orderId,
       OrderStatus: orderItems[orderId][0].OrderStatus,
       RestaurantId: orderItems[orderId][0].RestaurantId,
-      RestaurantName: orderItems[orderId][0].RestaurantName,
+      CustomerName: orderItems[orderId][0].CustomerName,
       AddressId: orderItems[orderId][0].AddressId,
       DeliveryAddress: orderItems[orderId][0].DeliveryAddress,
+      DeliveryType: orderItems[orderId][0].DeliveryType,
       items: orderItems[orderId],
     }));
     res.status(200).send(response);
@@ -137,8 +123,9 @@ router.post("/orders/restaurant/:id", function (req, res) {
     "UPDATE Orders SET OrderStatus = ? WHERE OrderId = ? AND RestaurantId = ?";
   dbPool.query(
     query,
-    [OrderStatus, restaurantId, OrderId],
+    [OrderStatus, OrderId, restaurantId],
     (err, results, fields) => {
+      console.log(err);
       res.status(200).send({ message: "updated successfully" });
     }
   );

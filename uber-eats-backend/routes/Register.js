@@ -11,7 +11,6 @@ router.post("/customer/register",async(req,resp)=>{
     customerId = uuidv4();
     country = req.body.country;
     city = req.body.city;
-    console.log(JSON.stringify([customerId,email,customerName,encrypTedPassword,country,city]));
     let query = "INSERT INTO Customer(CustomerId,EmailId,CustomerName,CustomerPassword,Country,City) VALUES(?,?,?,?,?,?)";
     dbPool.query(query,[customerId,email,customerName,encrypTedPassword,country,city],function(err,results, fields){
         if(err){
@@ -34,9 +33,7 @@ router.post("/restaurant/register",async(req,resp)=>{
     country = req.body.country;
     city = req.body.city;
     let query = "INSERT INTO Restaurant(RestaurantId,EmailId,RestaurantName,RestaurantPassword,Country,City) VALUES(?,?,?,?,?,?)";
-    console.log(JSON.stringify([restaurantId,email,restaurantName,encrypTedPassword,country,city]));
     dbPool.query(query,[restaurantId,email,restaurantName,encrypTedPassword,country,city],function(err,results, fields){
-        console.log(results);
         if(err){
             if (err.code === 'ER_DUP_ENTRY') {
                 resp.status(400).send({error:"Email Id is already registered"});

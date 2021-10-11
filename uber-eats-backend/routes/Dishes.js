@@ -4,8 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 
 router.post("/restaurant/dishes", function (req, resp) {
 
-    console.log(req.body);
-
     let { dishId, name, type, dishdesc, restaurantId, category, price, imageUrl } = req.body;
     if (!dishId) {
         dishId = uuidv4();
@@ -18,7 +16,6 @@ router.post("/restaurant/dishes", function (req, resp) {
                     resp.status(500).send({ error: 'Unknown internal server error' });
                 }
             } else {
-                console.log(results);
                 resp.send({ dishId: dishId });
             }
         });
@@ -32,7 +29,6 @@ router.post("/restaurant/dishes", function (req, resp) {
                     resp.status(500).send({ error: 'Unknown internal server error' });
                 }
             } else {
-                console.log(results);
                 resp.send({ dishId: dishId });
             }
         });
@@ -61,7 +57,6 @@ router.get("/dishes/:id", function (req, res) {
 router.get("/dishes", function (req, res) {
     const country = req.query.country;
     const city = req.query.city;
-    console.log(req.query);
     let queryCondition = '';
     if (country.length)
         queryCondition = queryCondition + " where r.Country = ? ";

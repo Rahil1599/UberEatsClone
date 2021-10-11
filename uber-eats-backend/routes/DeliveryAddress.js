@@ -9,7 +9,6 @@ router.post("/deliveryAddress/customer/:id", function (req, resp) {
     const { addressLine1, addressLine2, city, state, country, pincode, addressName, save } = req.body;
     const customerId = req.params.id;
     const addressId = uuidv4();
-    console.log(JSON.stringify([addressId, addressLine1, addressLine2, city, state, country, pincode]));
     const query = "INSERT INTO Address(AddressId,AddressLine1,AddressLine2,City,State,Country,PinCode) VALUES(?,?,?,?,?,?,?)";
     dbPool.query(query, [addressId, addressLine1, addressLine2, city, state, country, pincode], async (err, results, fields) => {
         if (err) {

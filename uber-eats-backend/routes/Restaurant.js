@@ -6,7 +6,6 @@ const {v4 : uuidv4} = require('uuid');
 router.get("/restaurant",function(req,res){
     const country = req.query.country;
     const city = req.query.city;
-    console.log(req.query);
     let queryCondition='';
     // if(country.length)
     //   queryCondition = queryCondition + " where Country = ? ";

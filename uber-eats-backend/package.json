@@ -10,6 +10,7 @@
   "author": "Rahil Shah",
   "license": "ISC",
   "dependencies": {
+    "@aws-cdk/aws-iam": "^1.127.0",
     "aws-sdk": "^2.991.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
