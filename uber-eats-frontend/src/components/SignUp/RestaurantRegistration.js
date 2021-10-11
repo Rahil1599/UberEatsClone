@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import bgImage from '../../images/Login/Uber-Eats-Register.jpeg'
+import bgImage from '../../images/Login/uber-eats-res-reg.jpeg'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import backendServer from '../../Config';
@@ -31,11 +31,11 @@ const locations = [
     },
     {
       key: "MPS",
-      value: "Milpitas"
+      value: "San Francisco"
     },
     {
       key: "SVA",
-      value: "Sunny Vale"
+      value: "Santa Clara"
     }]
   },
   {
