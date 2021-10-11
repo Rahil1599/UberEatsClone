@@ -35,7 +35,7 @@ router.post("/restaurant/:id", async (req, resp) => {
     });
   }
   if (pickup) {
-    let query = "INSERT IGNORE INTO PickUpRestaurant(RestaurantId) VALUES(?)";
+    let query = "INSERT IGNORE INTO PickupRestaurant(RestaurantId) VALUES(?)";
     dbPool.query(query, [restaurantId], function (err, results, fields) {
       if (err) {
         console.log(err);
@@ -43,7 +43,7 @@ router.post("/restaurant/:id", async (req, resp) => {
       }
     });
   } else {
-    let query = "DELETE FROM PickUpRestaurant where RestaurantId = ?";
+    let query = "DELETE FROM PickupRestaurant where RestaurantId = ?";
     dbPool.query(query, [restaurantId], function (err, results, fields) {
       if (err) {
         console.log(err);
