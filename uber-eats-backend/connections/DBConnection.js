@@ -1,4 +1,4 @@
-mysql = require('mysql');
+const mysql = require('mysql');
 var db;
 
 function dbConnectionProvider() {
