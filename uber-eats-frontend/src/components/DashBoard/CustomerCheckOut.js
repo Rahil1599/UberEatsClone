@@ -54,7 +54,8 @@ export default function CustomerCheckOut() {
     }
     
     const postOrder = (customerId, addressId) => {
-        axios.post(`${backendServer}/orders/customer/${customerId}`, { addressId: addressId, cart: cart })
+        const mode = sessionStorage.getItem('mode');
+        axios.post(`${backendServer}/orders/customer/${customerId}`, { mode, addressId: addressId, cart: cart })
             .then(response => {
                 setPostedOrder(response.data);
                 cleanUpTransaction();
@@ -86,7 +87,6 @@ export default function CustomerCheckOut() {
                 "addressLine1": addr1,
                 "addressLine2": addr2,
                 "city": city,
-                "state": state,
                 "country": country,
                 "pincode": pincode,
                 "addressName": addressName,

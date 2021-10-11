@@ -3,6 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import CheckBox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -21,6 +22,7 @@ import { store } from '../../state/store/store';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { DeliveryDining } from '@mui/icons-material';
 
 
 const theme = createTheme();
@@ -38,6 +40,8 @@ export default function RestaurantProfile() {
     const [phone, setPhone] = useState('');
     const [desc, setDesc] = useState('');
     const [pincode, setPincode] = useState('');
+    const [deliver, updateDeliveryOption] = useState(false);
+    const [pickup, updatePickupOption] = useState(false);
     const [restaurantId, setRestaurantId] = useState('');
 
     const history = useHistory();
@@ -64,6 +68,8 @@ export default function RestaurantProfile() {
             fromHrs: data.get('fromHrs'),
             toHrs: data.get('toHrs'),
             phone: data.get('phone'),
+            deliver: data.get('deliver'),
+            pickup: data.get('pickup'),
             imageUrl: imageUrl
         }
 
@@ -90,6 +96,8 @@ export default function RestaurantProfile() {
         setCountry(restaurant.Country);
         setState(restaurant.State);
         setRestaurantId(restaurant.RestaurantId);
+        updateDeliveryOption(restaurant.deliver)
+        updatePickupOption(restaurant.pickup)
         setImageUrl(restaurant.ImageUrl);
     }, [])
 
@@ -288,6 +296,32 @@ export default function RestaurantProfile() {
                                         autoComplete="pincode"
                                         autoFocus
                                     />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <CheckBox
+                                        margin="none"
+                                        required
+                                        fullWidth
+                                        id="deliver"
+                                        label="Allow Delivery?"
+                                        name="deliver"
+                                        checked={deliver}
+                                        onChange={(e) => updateDeliveryOption(e.target.checked)}
+                                        autoFocus
+                                    /> Deliver?
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <CheckBox
+                                        margin="none"
+                                        required
+                                        fullWidth
+                                        id="pickup"
+                                        label="Allow pickup?"
+                                        name="pickup"
+                                        checked={pickup}
+                                        onChange={(e) => updatePickupOption(e.target.checked)}
+                                        autoFocus
+                                    /> Pickup?
                                 </Grid>
                             </Grid>
                             <br />

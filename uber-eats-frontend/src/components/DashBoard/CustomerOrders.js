@@ -135,6 +135,10 @@ export default function Review(props) {
          Current Order Status: {order.OrderStatus}
           <br />
         </Typography>
+        <Typography variant="h9" fontWeight="600">
+         Delivery Type : {order.DeliveryType}
+          <br />
+        </Typography>
         <Typography  fontWeight="600">
         Delivered To: {order.DeliveryAddress}
         </Typography>

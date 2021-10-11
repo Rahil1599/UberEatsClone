@@ -191,7 +191,7 @@ export default function CustomerProfile() {
                                             fullWidth
                                             id="dob"
                                             type="text"
-                                            value={dob.split('T')[0]}
+                                            value={dob && dob.split('T')[0]}
                                             label="Date of Birth"
                                             name="dob"
                                             onChange={(e) => setDOB(e.target.value)}
