@@ -16,6 +16,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { Divider } from "@mui/material";
 import { capitalize } from "@material-ui/core";
+import NavigationBar from "../Navigation/NavigationBar";
 
 export default function Review(props) {
   const [orders, updateOrders] = useState([]);
@@ -101,6 +102,7 @@ export default function Review(props) {
   console.log(orders);
   return (
     <React.Fragment>
+      <NavigationBar type="restaurant"/>
       {!loading && (
         <>
           <Typography variant="h3" gutterBottom>

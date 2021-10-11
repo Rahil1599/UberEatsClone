@@ -60,7 +60,7 @@ export default function CustomerRegistration() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${bgImage})`,
+            backgroundImage: `url("https://images.squarespace-cdn.com/content/v1/56c8157b1bbee09ef64fcabe/1503039910647-OK6YUTNJDA0P0B3TWI4F/IMG_2704_LowRes.jpg?format=500w")`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

@@ -62,6 +62,10 @@ export default function Login() {
                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
               backgroundSize: 'auto',
               backgroundPosition: 'center',
+              display: 'flex',
+              flexDirection: 'center',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}>
             <Box
               sx={{
@@ -70,7 +74,10 @@ export default function Login() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                backgroundColor: 'white',
+                width: 'fit-content',
+                padding: '20px',
+                borderRedius: '24px',
+                backgroundColor: 'rgb(255,255,255,0.9)',
               }}
         
             >

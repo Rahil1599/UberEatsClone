@@ -55,7 +55,7 @@ export default function RestaurantLogin() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${bgimage})`,
+            backgroundImage: `url("https://table.skift.com/wp-content/uploads/2018/10/uber-eats-new-1200x600.jpg")`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

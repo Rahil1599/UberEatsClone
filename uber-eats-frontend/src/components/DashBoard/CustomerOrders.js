@@ -15,6 +15,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
 import { capitalize } from '@material-ui/core';
+import NavigationBar from "../Navigation/NavigationBar";
 
 
 
@@ -93,6 +94,7 @@ export default function Review(props) {
   return (
 
   <React.Fragment>
+    <NavigationBar type="customer"/>
     {!loading && (
       <>
       <Typography variant="h3" gutterBottom>
