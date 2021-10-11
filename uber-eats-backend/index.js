@@ -32,8 +32,8 @@ app.get("/", function (req, resp) {
   resp.send("Uber Eats Server Endpoints");
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Server listening on port 3000");
+app.listen(process.env.PORT || 8080, function () {
+  console.log(`Server listening on port ${process.env.PORT || 8080}`);
 });
 
 module.exports = app;
