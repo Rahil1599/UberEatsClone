@@ -34,7 +34,7 @@ var createDeliveryAddress = require('./services/deliveryAddress/createDeliveryAd
 var getDeliveryAddress = require('./services/deliveryAddress/getDeliveryAddress');
 
 const mongoose = require('mongoose');
-const { mongoDB } = require('./config');
+const { mongoDB } = require('./Config');
 
 var options = {
     useNewUrlParser: true,

@@ -48,7 +48,7 @@ app.get("/", function (req, resp) {
 });
 
 const mongoose = require("mongoose");
-const { mongoDB } = require("./config");
+const { mongoDB } = require("./Config");
 
 var options = {
   useNewUrlParser: true,
