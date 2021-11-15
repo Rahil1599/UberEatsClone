@@ -165,7 +165,7 @@ export default function AddDish() {
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
           <CssBaseline />
-          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }, bgcolor: 'rgba(123,222,111,0.8)' }}>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <Grid container spacing={2}>
                 <Grid style={imageStyle} item xs={12} sm={6} alignItems="center">

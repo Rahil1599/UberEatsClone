@@ -23,7 +23,6 @@ describe('Restaurant Login Tests', () => {
     const password = screen.getByTestId('password').querySelector('input');
     const name = screen.getByTestId('name').querySelector('input');
 
-    
     fireEvent.change(email, { target: { value: 'rahil.shah2107@gmail.com' } });
     fireEvent.change(password, { target: { value: 'password' } });
     fireEvent.change(name, { target: { value: 'rahil.shah2107' } });

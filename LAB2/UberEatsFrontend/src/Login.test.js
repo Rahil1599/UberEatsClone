@@ -12,7 +12,6 @@ const server = setupServer(
   rest.post('http://18.225.37.132:3001/uber-eats/api/customer/register', (req, res, ctx) => res(ctx.json([{ EmailId: 'rahil@gmail.com' }]))),
 );
 
-
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());

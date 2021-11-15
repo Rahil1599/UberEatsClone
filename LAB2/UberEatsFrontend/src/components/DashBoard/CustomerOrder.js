@@ -150,10 +150,7 @@ const CustomerOrder = () => {
                 color="text.primary"
                 gutterBottom
               >
-                Your Orders!
-              </Typography>
-              <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                Here's what you have ordered...
+                Order History!
               </Typography>
               <Stack
                 sx={{ pt: 4 }}
@@ -201,7 +198,10 @@ const CustomerOrder = () => {
                 ? cards.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : cards).map((card) => (
                   <Grid item key={card.OrderId} xs={12}>
-                    <Card>
+                    <Card sx={{
+                      bgcolor: 'rgba(123,222,111,0.8)',
+                    }}
+                    >
                       <CardContent>
                         <Grid>
                           <Grid item xs={12} sm={4}>

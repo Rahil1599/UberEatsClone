@@ -32,8 +32,9 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import {
   Home,
   Favorite,
-  Group, AccountCircle,
 } from '@material-ui/icons';
+import PersonIcon from '@mui/icons-material/Person';
+import BusinessIcon from '@mui/icons-material/Business';
 import RestaurantMenu from '@material-ui/icons/RestaurantMenu';
 import RecentActors from '@material-ui/icons/RecentActors';
 
@@ -59,7 +60,6 @@ import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../../images/Uber_Eats_2020_logo.svg';
 import { store } from '../../state/store/store';
 import doLogoutUser from '../../state/action-creators/loginActionCreator';
 import backendServer from '../../Config';
@@ -77,7 +77,7 @@ const useStyles = makeStyles({
 });
 
 const style = {
-  background: '#bdbdbd',
+  background: 'rgba(123,222,111,0.8)',
 };
 
 const Search = styled('div')(({ theme }) => ({
@@ -271,22 +271,22 @@ export default function NavigationBar(props) {
 
   const general = [
     {
-      listIcon: <AccountCircle />,
+      listIcon: <PersonIcon />,
       listText: 'Customer Login',
       listPath: '/',
     },
     {
-      listIcon: <AccountCircle />,
+      listIcon: <PersonIcon />,
       listText: 'Customer Sign Up',
       listPath: '/customer/register',
     },
     {
-      listIcon: <Group />,
+      listIcon: <BusinessIcon />,
       listText: 'Restaurant Login',
       listPath: '/restaurant/login',
     },
     {
-      listIcon: <Group />,
+      listIcon: <BusinessIcon />,
       listText: 'Restaurant Sign Up',
       listPath: '/restaurant/register',
     },
@@ -370,7 +370,7 @@ export default function NavigationBar(props) {
               </Drawer>
 
               <Typography variant="h6" className={classes.title}>
-                <img src={logo} width="120" height="80" alt="" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Eat-icon.svg" width="120" height="80" alt="" />
               </Typography>
               {props.type === 'customer' && props.search
                 && (

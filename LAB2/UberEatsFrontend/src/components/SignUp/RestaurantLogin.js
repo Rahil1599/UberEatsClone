@@ -10,13 +10,13 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoginIcon from '@mui/icons-material/Login';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import bgimage from '../../images/Login/UberEatsandWokano.png';
+// import bgimage from '../../images/Login/UberEatsandWokano.png';
 import backendServer from '../../Config';
 import { store } from '../../state/store/store';
 import NavigationBar from '../Navigation/NavigationBar';
@@ -74,7 +74,7 @@ export default function RestaurantLogin() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: `url(${bgimage})`,
+              backgroundImage: 'url(https://images.all-free-download.com/images/graphiclarge/childhood_background_kid_eating_fast_food_icon_6838709.jpg)',
               backgroundRepeat: 'no-repeat',
               backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
               backgroundSize: 'cover',
@@ -91,8 +91,8 @@ export default function RestaurantLogin() {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
+              <Avatar sx={{ m: 1, bgcolor: 'gray' }}>
+                <LoginIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Restaurant Login

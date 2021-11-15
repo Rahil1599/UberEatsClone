@@ -11,7 +11,7 @@ async function handle_request(req, callback) {
     } else {
       customer.Favourites.push(RestaurantId);
       updatedCustomer = await customer.save();
-      callback(null, updateCustomer);
+      callback(null, updatedCustomer);
     }
   } catch (error) {
     callback(error, null);

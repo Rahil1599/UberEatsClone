@@ -10,14 +10,13 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoginIcon from '@mui/icons-material/Login';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import bgimage from '../../images/Login/UberEatsandWokano.png';
 import backendServer from '../../Config';
 import NavigationBar from '../Navigation/NavigationBar';
 import { setUser } from '../../state/action-creators/loginActionCreator';
@@ -76,7 +75,7 @@ export default function Login() {
             sm={4}
             md={7}
             sx={{
-              backgroundImage: `url(${bgimage})`,
+              backgroundImage: 'url(https://images.pexels.com/photos/616401/pexels-photo-616401.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1000)',
               backgroundRepeat: 'no-repeat',
               backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
               backgroundSize: 'cover',
@@ -93,8 +92,8 @@ export default function Login() {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
+              <Avatar sx={{ m: 1, bgcolor: 'gray' }}>
+                <LoginIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Customer Login

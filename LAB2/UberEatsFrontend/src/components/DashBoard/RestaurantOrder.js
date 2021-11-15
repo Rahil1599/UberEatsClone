@@ -207,7 +207,7 @@ const RestaurantOrder = () => {
                 ? cards.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : cards).map((card) => (
                   <Grid item key={card.OrderId} xs={12}>
-                    <Card>
+                    <Card sx={{ bgcolor: 'rgba(123,222,111,0.8)' }}>
                       <CardContent>
                         <Grid container spacing={1}>
                           <Grid item xs={12} sm={2}>

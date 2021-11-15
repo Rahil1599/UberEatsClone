@@ -22,7 +22,7 @@ describe('Customer Login Tests', () => {
     const email = screen.getByTestId('email').querySelector('input');
     const password = screen.getByTestId('password').querySelector('input');
     fireEvent.change(email, { target: { value: 'rahil.shah2107@gmail.com' } });
-    
+
     fireEvent.change(password, { target: { value: 'password' } });
 
     expect(email.value).toBe('rahil.shah2107@gmail.com');

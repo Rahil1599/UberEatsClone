@@ -93,10 +93,7 @@ export default function CustomerPersonalization() {
                 color="text.primary"
                 gutterBottom
               >
-                Your Favourites!
-              </Typography>
-              <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                All at one place.What will you pick today?
+                Favourites!
               </Typography>
               <Stack
                 sx={{ pt: 4 }}
@@ -115,7 +112,9 @@ export default function CustomerPersonalization() {
               {cards.map((card) => (
                 <Grid item key={card.RestaurantId} xs={12} sm={6} md={4}>
                   <Card
-                    sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                    sx={{
+                      height: '100%', display: 'flex', flexDirection: 'column', bgcolor: 'rgba(123,222,111,0.8)',
+                    }}
                   >
                     <CardMedia
                       component="img"
